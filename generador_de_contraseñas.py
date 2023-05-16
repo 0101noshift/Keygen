@@ -18,9 +18,9 @@ root.configure(bg="wheat")
 def generador():
     ll = (int(longitud_spinbox.get()))
     carac = string.ascii_lowercase + string.ascii_uppercase + string.digits + string.punctuation
-    for i in range(ll):
+    for _ in range(ll):
         passw = "".join(random.choice(carac))
-        contraseña_respuesta.config(text=passw)
+        contrasena_respuesta.config(text=passw)
 
 
 
@@ -102,14 +102,15 @@ contraseña_generada_label = Label(root,
                        font=("helvetica", 12),
                        anchor="center",).pack()
 
-contraseña_respuesta = Label(root,
+contrasena_respuesta = Label(root,
                        text=" ",
                        bg="wheat", fg="black",
                        font=("helvetica", 20),
                        width=20, anchor="center")
-contraseña_respuesta.pack()
+contrasena_respuesta.pack()
 
 boton_generar = Button(root, text="GENERAR", command=generador)
 boton_generar.pack()
 
 root.mainloop()
+

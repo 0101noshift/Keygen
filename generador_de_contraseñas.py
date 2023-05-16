@@ -18,7 +18,7 @@ root.configure(bg="wheat")
 def generador():
     ll = (int(longitud_spinbox.get()))
     carac = string.ascii_lowercase + string.ascii_uppercase + string.digits + string.punctuation
-    for _ in range(ll):
+    for i in range(ll):
         passw = "".join(random.choice(carac))
         contrasena_respuesta.config(text=passw)
 

@@ -109,7 +109,7 @@ contrasena_respuesta = Label(root,
                        width=20, anchor="center")
 contrasena_respuesta.pack()
 
-boton_generar = Button(root, text="GENERAR", command=generador)
+boton_generar = Button(root, text="GENERAR", command= lambda:((generador())*range(longitud_spinbox.get())))
 boton_generar.pack()
 
 root.mainloop()

@@ -7,19 +7,19 @@ root.title("Generador de contraseñas")
 root.geometry("400x300")
 root.configure(bg="wheat")
 
-# def generar_passw():
-#     ll = int(longitud_spinbox.get())
-#     caracteres = string.ascii_letters + string.digits + string.punctuation
-#     for i in range(ll):
-#         passw = ''.join(random.choice(caracteres))
-#     contraseña_respuesta.config(text=passw)
-
+ll = IntVar()
+opcion_minuscula = BooleanVar()
+opcion_mayuscula = BooleanVar()
+opcion_numero = BooleanVar()
+opcion_special_carac = BooleanVar()
 
 def generador():
     ll = (int(longitud_spinbox.get()))
+    
     carac = string.ascii_lowercase + string.ascii_uppercase + string.digits + string.punctuation
+    passw = ""
     for i in range(ll):
-        passw = "".join(random.choice(carac))
+        passw = passw + "".join(random.choice(carac))
         contrasena_respuesta.config(text=passw)
 
 
@@ -29,14 +29,6 @@ cuadro_opciones = LabelFrame(root,
                              font=("helvetica", 14),
                              bg="wheat", fg="grey")
 cuadro_opciones.pack()
-
-cero = 0
-ll = IntVar()
-opcion_minuscula = BooleanVar()
-opcion_mayuscula = BooleanVar()
-opcion_numero = BooleanVar()
-opcion_special_carac = BooleanVar()
-
 
 check_minusculas = Checkbutton(cuadro_opciones,
                                text="Minúsculas",
@@ -57,7 +49,7 @@ check_mayusculas.pack()
 check_mayusculas.deselect()
 
 check_numeros = Checkbutton(cuadro_opciones,
-                               text="Númeross",
+                               text="Números",
                                bg="wheat",
                                font=("helvetica", 12),
                                width=20, anchor=W,
@@ -81,7 +73,7 @@ cuadro_longitud = LabelFrame(root,
 cuadro_longitud.pack()
 
 longitud_label = Label(cuadro_longitud,
-                       text="Longitud: ",
+                       text="Cantidad de caracteres: ",
                        bg="wheat",
                        font=("helvetica", 12),
                        width=20, anchor=W,)
@@ -109,7 +101,7 @@ contrasena_respuesta = Label(root,
                        width=20, anchor="center")
 contrasena_respuesta.pack()
 
-boton_generar = Button(root, text="GENERAR", command= lambda:((generador())*range(longitud_spinbox.get())))
+boton_generar = Button(root, text="GENERAR", command= lambda:(generador()))
 boton_generar.pack()
 
 root.mainloop()

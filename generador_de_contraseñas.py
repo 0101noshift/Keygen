@@ -1,26 +1,25 @@
 from tkinter import *
+from tkinter import messagebox
 import random
 import string
 
 root = Tk()
 root.title("Generador de contraseñas")
-root.geometry("400x300")
+root.geometry("500x400")
 root.configure(bg="wheat")
 
 ll = IntVar()
-opcion_minuscula = BooleanVar()
-opcion_mayuscula = BooleanVar()
-opcion_numero = BooleanVar()
-opcion_special_carac = BooleanVar()
 
 def generador():
-    ll = (int(longitud_spinbox.get()))
-    
-    carac = string.ascii_lowercase + string.ascii_uppercase + string.digits + string.punctuation
-    passw = ""
-    for i in range(ll):
-        passw = passw + "".join(random.choice(carac))
-        contrasena_respuesta.config(text=passw)
+    if (opcion_minuscula.get() + opcion_mayuscula.get() + opcion_numero.get() + opcion_special_carac.get()) == 0:
+        messagebox.showwarning(message="Debe escoger por lo menos una opción", title="Alerta")
+    else:
+        ll = (int(longitud_spinbox.get()))
+        carac = (string.ascii_lowercase * opcion_minuscula.get()) + (string.ascii_uppercase * opcion_mayuscula.get()) + (string.digits * opcion_numero.get()) + (string.punctuation * opcion_special_carac.get())
+        passw = ""
+        for i in range(ll):
+            passw = passw + "".join(random.choice(carac))
+            contrasena_respuesta.config(text=passw)
 
 
 
@@ -30,38 +29,50 @@ cuadro_opciones = LabelFrame(root,
                              bg="wheat", fg="grey")
 cuadro_opciones.pack()
 
+opcion_minuscula = BooleanVar()
 check_minusculas = Checkbutton(cuadro_opciones,
                                text="Minúsculas",
                                bg="wheat",
                                font=("helvetica", 12),
                                width=20, anchor=W,
+                               onvalue=True,
+                               offvalue=False,
                                variable=opcion_minuscula)
 check_minusculas.pack()
 check_minusculas.select()
 
+opcion_mayuscula = BooleanVar()
 check_mayusculas = Checkbutton(cuadro_opciones,
                                text="Mayúsculas",
                                bg="wheat",
                                font=("helvetica", 12),
                                width=20, anchor=W,
+                               onvalue=True,
+                               offvalue=False,
                                variable=opcion_mayuscula)
 check_mayusculas.pack()
 check_mayusculas.deselect()
 
+opcion_numero = BooleanVar()
 check_numeros = Checkbutton(cuadro_opciones,
                                text="Números",
                                bg="wheat",
                                font=("helvetica", 12),
                                width=20, anchor=W,
+                               onvalue=True,
+                               offvalue=False,
                                variable=opcion_numero)
 check_numeros.pack()
 check_numeros.deselect()
 
+opcion_special_carac = BooleanVar()
 check_special_carac = Checkbutton(cuadro_opciones,
                                text="Caracteres especiales",
                                bg="wheat",
                                font=("helvetica", 12),
                                width=20, anchor=W,
+                               onvalue=True,
+                               offvalue=False,
                                variable=opcion_special_carac)
 check_special_carac.pack()
 check_special_carac.deselect()
@@ -98,7 +109,7 @@ contrasena_respuesta = Label(root,
                        text=" ",
                        bg="wheat", fg="black",
                        font=("helvetica", 20),
-                       width=20, anchor="center")
+                       width=35, anchor="center")
 contrasena_respuesta.pack()
 
 boton_generar = Button(root, text="GENERAR", command= lambda:(generador()))
